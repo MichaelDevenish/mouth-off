@@ -7,11 +7,13 @@ class MobileApp extends Component {
     constructor(props) {
         super(props);
         this.connectHandler = this.connectHandler.bind(this);
+        this.handlePenChange = this.handlePenChange.bind(this);
     }
 
     state = {
         x: 0,
         y: 0,
+        pendown: false,
         connectedTo: null,
         id: this.props.id.id,
         peer: this.props.peer
@@ -37,6 +39,16 @@ class MobileApp extends Component {
             x: left,
             y: top
         })
+        if (this.props.conn === null) {
+            console.log("no connection");
+        } else {
+            this.props.conn.send({
+                type: "🖌️",
+                penDown: this.state.pendown,
+                x: left,
+                y: top
+            });
+        }
     }
 
     connectHandler(stringId) {
@@ -46,6 +58,10 @@ class MobileApp extends Component {
             console.log('connection open', conn);
             conn.send('');
         });
+    }
+
+    handlePenChange(pendown) {
+        this.setState({pendown});
     }
 
     componentDidMount() {
@@ -63,6 +79,7 @@ class MobileApp extends Component {
         return (
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
+                <button onMouseDown={() => handlePenChange(true)} onMouseUp={() => handlePenChange(false)} type="button">Connect</button> 
                 <DrawingCanvas
                     left={left}
                     top={top}
