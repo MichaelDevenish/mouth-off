@@ -1,10 +1,20 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import DrawingCanvas from './DrawingCanvas';
+import ConnectInput from "./ConnectInput.js";
 
 class MobileApp extends Component {
+
+    constructor(props) {
+        super(props);
+        this.connectHandler = this.connectHandler.bind(this);
+    }
+
     state = {
         x: 0,
-        y: 0
+        y: 0,
+        connectedTo: null,
+        id: this.props.id.id,
+        peer: this.props.peer
     }
 
     motion = (event) => {
@@ -29,6 +39,14 @@ class MobileApp extends Component {
         })
     }
 
+    connectHandler(stringId) {
+        var conn = this.state.peer.connect(stringId);
+        conn.on('open', function () {
+            console.log('connection open', conn);
+            conn.send('hi');
+        });
+    }
+
     componentDidMount() {
         if (window.DeviceMotionEvent) {
             window.addEventListener("devicemotion", this.motion, false)
@@ -42,11 +60,14 @@ class MobileApp extends Component {
         } = this.state
 
         return (
-            <DrawingCanvas
-                left={left}
-                top={top}
-                penDown
-            />
+            <Fragment>
+                <ConnectInput connectHandler={this.connectHandler} />
+                <DrawingCanvas
+                    left={left}
+                    top={top}
+                    penDown
+                />
+            </Fragment>
         );
     }
 }

@@ -84,7 +84,7 @@ class DrawingCanvas extends Component {
                     width={window.innerWidth}
                     height={window.innerHeight}
                 />
-                <div class="ball" style={{ left: left - 5, top: top - 5 }} />
+                <div class="ball" style={{ left: left - 5, top: top + 95 }} />
             </Fragment>
         )
     }
