@@ -40,13 +40,10 @@ class MobileApp extends Component {
     }
 
     connectHandler(stringId) {
-        console.log('id', stringId);
         var conn = this.state.peer.connect(stringId);
         conn.on('open', function(){
-            conn.send({
-                type: 'connect',
-                id: this.state.id 
-            });
+            console.log('connection open', conn);
+            conn.send('hi');
         });
     }
 

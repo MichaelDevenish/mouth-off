@@ -38,8 +38,9 @@ class App extends Component {
 
     onComponentDidMount() {
         this.state.peer.on('connection', function(conn) {
+            console.log('oh no', conn);
             conn.on('data', function(data){
-                console.log(data);
+                console.log('get me that data', data);
             });
         });
     }
