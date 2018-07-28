@@ -16,7 +16,9 @@ class MobileApp extends Component {
         penDown: false,
         connectedTo: null,
         id: this.props.id.id,
-        peer: this.props.peer
+        peer: this.props.peer,
+        accel: {},
+        rotate: {}
     }
 
     motion = (event) => {
@@ -24,6 +26,11 @@ class MobileApp extends Component {
             x,
             y
         } = this.state
+
+        this.setState({
+            accel: event.accelerationIncludingGravity,
+            rotate: event.rotationRate
+        });
 
         let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)) * -1);
         let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)));
@@ -80,6 +87,16 @@ class MobileApp extends Component {
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
                 <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
+                <div>
+                    <h2>Acceleration</h2>
+                    <p>X: {this.parseFloat(this.state.accel.x).toFixed(2)}</p>
+                    <p>Y: {this.parseFloat(this.state.accel.y).toFixed(2)}</p>
+                    <p>Z: {this.parseFloat(this.state.accel.z).toFixed(2)}</p>
+                    <h2>Rotation</h2>
+                    <p>Alpha: {this.parseFloat(this.state.alpha).toFixed(2)}</p>
+                    <p>Beta: {this.parseFloat(this.state.beta).toFixed(2)}</p>
+                    <p>Gamma: {this.parseFloat(this.state.gamma).toFixed(2)}</p>
+                </div>
                 <DrawingCanvas
                     left={left}
                     top={top}
