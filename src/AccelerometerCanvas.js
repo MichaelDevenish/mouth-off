@@ -1,54 +1,69 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
 
 class AccelerometerCanvas extends Component {
     state = {
         x: 0,
         y: 0,
-        z: 0,
-        alpha: 0,
-        beta: 0,
-        gamma: 0
+        prevPos: {
+            offsetX: 0,
+            offsetY: 0
+        }
     }
+
     motion = (event) => {
+        const {
+            x,
+            y,
+            prevPos: {
+                offsetX,
+                offsetY
+            }
+        } = this.state
+
+        let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)));
+        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)) * -1);
+
+        const maxWidth = window.innerWidth - 4;
+        const maxHeight = window.innerHeight - 4;
+        if (top > maxHeight) top = maxHeight
+        if (left > maxWidth) left = maxWidth
+        if (top < 0) top = 0
+        if (left < 0) left = 0
+
+        const ctx = this.refs.canvas.getContext('2d');
+        ctx.beginPath()
+        ctx.strokeStyle = 'rgb(0,0,0)'
+        ctx.moveTo(offsetX, offsetY)
+        ctx.lineTo(left, top);
+        ctx.stroke();
+
         this.setState({
-            x: event.accelerationIncludingGravity.x,
-            y: event.accelerationIncludingGravity.y,
-            z: event.accelerationIncludingGravity.z
+            x: left,
+            y: top,
+            prevPos: {
+                offsetX: left,
+                offsetY: top
+            }
         })
     }
 
-    orientation = (event) => {
-        this.setState({
-            alpha: event.alpha,
-            beta: event.beta,
-            gamma: event.gamma
-        })
-    }
     componentDidMount() {
+        const ctx = this.refs.canvas.getContext('2d')
+        ctx.lineJoin = 'round'
+        ctx.lineCap = 'round'
+        ctx.lineWidth = 5
         if (window.DeviceMotionEvent) {
             window.addEventListener("devicemotion", this.motion, false)
-        } if (window.DeviceOrientationEvent) {
-            window.addEventListener("deviceorientation", this.orientation, false)
         }
     }
 
     render() {
-        const {
-            x,
-            y,
-            z,
-            alpha,
-            beta,
-            gamma
-        } = this.state
-
         return (
-            <div className="App">
-                {x},{y},{z},{alpha},{beta},{gamma}
-            </div>
+            <canvas
+                ref="canvas"
+                width={window.innerWidth}
+                height={window.innerHeight}
+            />
         );
     }
 }
