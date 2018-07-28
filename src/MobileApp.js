@@ -40,9 +40,10 @@ class MobileApp extends Component {
 
     connectHandler(stringId) {
         var conn = this.state.peer.connect(stringId);
+        this.props.handleSetConn(conn);
         conn.on('open', function(){
             console.log('connection open', conn);
-            conn.send('hi');
+            conn.send('');
         });
     }
 

@@ -19,6 +19,7 @@ class App extends Component {
     constructor(props) {
       super(props);
       const id = `${generatePin()}`
+      this.handleSetConn = this.handleSetConn.bind(this);
       this.state = {
         // Store the pin/id for display and reference
         id: id,
@@ -36,12 +37,25 @@ class App extends Component {
       };
     }
 
-    onComponentDidMount() {
-        this.state.peer.on('connection', function(conn) {
-            console.log('oh no', conn);
-            conn.on('data', function(data){
-                console.log('get me that data', data);
+    componentDidMount() {
+        const { peer } = this.state;
+
+        peer.on('error', (err) => {
+            console.log('error', err);
+        });
+
+        peer.on('connection', (conn) => {
+            this.handleSetConn(conn);
+            console.log('conn', conn);
+            this.state.conn.on('data', function(data){
+                console.log('data', data);
             });
+        });
+    }
+
+    handleSetConn(conn) {
+        this.setState({
+            conn
         });
     }
 
@@ -53,12 +67,12 @@ class App extends Component {
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
-                  <MobileApp id={this.state.id} peer={this.state.peer}/>
+                  <MobileApp id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
                 </BrowserView>
 
                 <MobileView>
                   <h1> {this.state.id} </h1>
-                  <MobileApp id={this.state.id} peer={this.state.peer}/>
+                  <MobileApp id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
                 </MobileView>
             </div>
         );
