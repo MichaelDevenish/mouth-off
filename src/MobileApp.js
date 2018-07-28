@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
 import DrawingCanvas from './DrawingCanvas';
+import ConnectInput from "./ConnectInput.js";
 
 class MobileApp extends Component {
+
+    constructor(props) {
+        super(props);
+        this.connectHandler = this.connectHandler.bind(this);
+    }
+
     state = {
         x: 0,
         y: 0
@@ -29,6 +36,10 @@ class MobileApp extends Component {
         })
     }
 
+    connectHandler() {
+        // todo
+    }
+
     componentDidMount() {
         if (window.DeviceMotionEvent) {
             window.addEventListener("devicemotion", this.motion, false)
@@ -42,10 +53,16 @@ class MobileApp extends Component {
         } = this.state
 
         return (
-            <DrawingCanvas
-                left={left}
-                top={top}
-            />
+            <div >
+                <div>
+                    <ConnectInput connectHandler={this.connectHandler}/>
+                </div>
+                <div>
+                <DrawingCanvas
+                        left={left}
+                        top={top} />
+                </div>
+            </div>
         );
     }
 }
