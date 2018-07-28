@@ -37,6 +37,7 @@ class App extends Component {
           'test',
           'test2'
         ],
+        conn: null
       };
     }
 
@@ -52,6 +53,9 @@ class App extends Component {
             console.log('conn', conn);
             this.state.conn.on('data', function(data){
                 console.log('data', data);
+                if (data.type === "🖌️") {
+                    console.log(`Move to ${data.x} ${data.y}`);
+                }
             });
         });
     }
@@ -75,7 +79,7 @@ class App extends Component {
 
                 <MobileView>
                   <h1> {this.state.id} </h1>
-                  <MobileApp id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
+                  <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
                 </MobileView>
             </div>
         );
