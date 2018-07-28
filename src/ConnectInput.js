@@ -1,25 +1,26 @@
 import React from "react";
 
-export default class {
+export default class ConnectInput extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            input: ""
+            input: ''
         }
         this.handleChange = this.handleChange.bind(this);
     }
 
-    handleChange(input) {
-        this.setState(input);
+    handleChange(event) {
+        this.setState({
+            input: event.target.value
+        });
     }
 
     render() {
-        const { connectHandler } = this.props; 
-        const { input } = this.state;
+        const {connectHandler} = this.props;
         return (
             <div>
-                <input value={input} onChange={this.handleChange} />
-                <button onClick={() => connectHandler(input)} type="button">Connect</button> 
+                <input value={this.state.input} onChange={this.handleChange} />
+                <button onClick={() => connectHandler(this.state.input)} type="button">Connect</button> 
             </div>
         )
         

@@ -36,6 +36,14 @@ class App extends Component {
       };
     }
 
+    onComponentDidMount() {
+        this.state.peer.on('connection', function(conn) {
+            conn.on('data', function(data){
+                console.log(data);
+            });
+        });
+    }
+
     render() {
         return (
             <div className="App">
@@ -44,11 +52,12 @@ class App extends Component {
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
+                  <MobileApp id={this.state.id} peer={this.state.peer}/>
                 </BrowserView>
 
                 <MobileView>
                   <h1> {this.state.id} </h1>
-                  <MobileApp />
+                  <MobileApp id={this.state.id} peer={this.state.peer}/>
                 </MobileView>
             </div>
         );

@@ -11,7 +11,9 @@ class MobileApp extends Component {
 
     state = {
         x: 0,
-        y: 0
+        y: 0,
+        id: this.props.id.id,
+        peer: this.props.peer
     }
 
     motion = (event) => {
@@ -36,8 +38,15 @@ class MobileApp extends Component {
         })
     }
 
-    connectHandler() {
-        // todo
+    connectHandler(stringId) {
+        console.log('id', stringId);
+        var conn = this.state.peer.connect(stringId);
+        conn.on('open', function(){
+            conn.send({
+                type: 'connect',
+                id: this.state.id 
+            });
+        });
     }
 
     componentDidMount() {
