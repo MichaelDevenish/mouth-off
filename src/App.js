@@ -56,14 +56,14 @@ class App extends Component {
         peer.on('connection', (conn) => {
             this.handleSetConn(conn);
             console.log('conn', conn);
-            this.state.conn.on('data', function(data){
+            this.state.conn.on('data', (data) => {
                 console.log('data', data);
                 if (data.type === "draw") {
                     console.log(`Move to ${data.x} ${data.y}`);
                     this.setState({
                         x: data.x,
                         y: data.y,
-                        pendown: data.penDown
+                        penDown: data.penDown
                     });
                 }
             });
@@ -84,7 +84,7 @@ class App extends Component {
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
-                  <DrawingCanvas top={this.state.x} left={this.state.y} penDown={this.state.penDown}/>
+                  <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
                 </BrowserView>
 
                 <MobileView>

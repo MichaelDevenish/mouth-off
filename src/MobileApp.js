@@ -13,10 +13,13 @@ class MobileApp extends Component {
     state = {
         x: 0,
         y: 0,
-        pendown: false,
+        penDown: false,
         connectedTo: null,
         id: this.props.id.id,
-        peer: this.props.peer
+        peer: this.props.peer,
+        accel: {},
+        rotate: {},
+        event: {}
     }
 
     motion = (event) => {
@@ -25,8 +28,14 @@ class MobileApp extends Component {
             y
         } = this.state
 
-        let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)));
-        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)) * -1);
+        this.setState({
+            accel: event.accelerationIncludingGravity,
+            rotate: event.rotationRate,
+            event
+        });
+
+        let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)) * -1);
+        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)));
 
         const maxWidth = window.innerWidth - 4;
         const maxHeight = window.innerHeight - 4;
@@ -39,12 +48,12 @@ class MobileApp extends Component {
             x: left,
             y: top
         })
-        if (this.props.conn === null) {
+        if (!this.props.conn) {
             console.log("no connection");
         } else {
             this.props.conn.send({
                 type: "draw",
-                penDown: this.state.pendown,
+                penDown: true,
                 x: left,
                 y: top
             });
@@ -60,13 +69,13 @@ class MobileApp extends Component {
         });
     }
 
-    handlePenChange(pendown) {
-        this.setState({pendown});
+    handlePenChange(penDown) {
+        this.setState({penDown});
     }
 
     componentDidMount() {
         if (window.DeviceMotionEvent) {
-            window.addEventListener("devicemotion", this.motion, false)
+            window.addEventListener("devicemotion", this.motion, true);
         }
     }
 
@@ -79,7 +88,18 @@ class MobileApp extends Component {
         return (
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
-                <button class="pen-button" onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw!</button> 
+                <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
+                <div>
+                    <h2>Acceleration</h2>
+                    <p>X: {parseFloat(this.state.accel.x).toFixed(2)}</p>
+                    <p>Y: {parseFloat(this.state.accel.y).toFixed(2)}</p>
+                    <p>Z: {parseFloat(this.state.accel.z).toFixed(2)}</p>
+                    <h2>Rotation</h2>
+                    <p>Alpha: {parseFloat(this.state.rotate.alpha).toFixed(2)}</p>
+                    <p>Beta: {parseFloat(this.state.rotate.beta).toFixed(2)}</p>
+                    <p>Gamma: {parseFloat(this.state.rotate.gamma).toFixed(2)}</p>
+                    <h3>{this.state.event}</h3>
+                </div>
                 <DrawingCanvas
                     left={left}
                     top={top}
