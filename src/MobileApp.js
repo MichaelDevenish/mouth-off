@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import DrawingCanvas from './DrawingCanvas';
 import ConnectInput from "./ConnectInput.js";
 
@@ -12,6 +12,7 @@ class MobileApp extends Component {
     state = {
         x: 0,
         y: 0,
+        connectedTo: null,
         id: this.props.id.id,
         peer: this.props.peer
     }
@@ -60,16 +61,14 @@ class MobileApp extends Component {
         } = this.state
 
         return (
-            <div >
-                <div>
-                    <ConnectInput connectHandler={this.connectHandler}/>
-                </div>
-                <div>
+            <Fragment>
+                <ConnectInput connectHandler={this.connectHandler} />
                 <DrawingCanvas
-                        left={left}
-                        top={top} />
-                </div>
-            </div>
+                    left={left}
+                    top={top}
+                    penDown
+                />
+            </Fragment>
         );
     }
 }

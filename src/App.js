@@ -14,6 +14,9 @@ function generatePin () {
     return ("0" + (Math.floor(Math.random() * (max - min + 1)) + min)).substr(-4);
 }
 
+const host = 'c0585c6e.ngrok.io';
+const port = 80;
+
 class App extends Component {
 
     constructor(props) {
@@ -25,7 +28,7 @@ class App extends Component {
         id: id,
         
         // Register the client with the peerjs-server
-        peer: new Peer(id, { host: 'localhost', port: 9000, path: '/', key: 'peerjs' }),
+        peer: new Peer(id, { host, port, path: '/', key: 'peerjs' }),
 
         // Record the client type for easy reference
         type: isBrowser ? 'browser' : 'mobile',
