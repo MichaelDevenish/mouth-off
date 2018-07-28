@@ -45,6 +45,7 @@ class MobileApp extends Component {
             <DrawingCanvas
                 left={left}
                 top={top}
+                penDown
             />
         );
     }
