@@ -18,7 +18,8 @@ class MobileApp extends Component {
         id: this.props.id.id,
         peer: this.props.peer,
         accel: {},
-        rotate: {}
+        rotate: {},
+        event: {}
     }
 
     motion = (event) => {
@@ -29,7 +30,8 @@ class MobileApp extends Component {
 
         this.setState({
             accel: event.accelerationIncludingGravity,
-            rotate: event.rotationRate
+            rotate: event.rotationRate,
+            event
         });
 
         let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)) * -1);
@@ -73,7 +75,7 @@ class MobileApp extends Component {
 
     componentDidMount() {
         if (window.DeviceMotionEvent) {
-            window.addEventListener("devicemotion", this.motion, false)
+            window.addEventListener("devicemotion", this.motion, true);
         }
     }
 
@@ -89,13 +91,14 @@ class MobileApp extends Component {
                 <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
                 <div>
                     <h2>Acceleration</h2>
-                    <p>X: {this.parseFloat(this.state.accel.x).toFixed(2)}</p>
-                    <p>Y: {this.parseFloat(this.state.accel.y).toFixed(2)}</p>
-                    <p>Z: {this.parseFloat(this.state.accel.z).toFixed(2)}</p>
+                    <p>X: {parseFloat(this.state.accel.x).toFixed(2)}</p>
+                    <p>Y: {parseFloat(this.state.accel.y).toFixed(2)}</p>
+                    <p>Z: {parseFloat(this.state.accel.z).toFixed(2)}</p>
                     <h2>Rotation</h2>
-                    <p>Alpha: {this.parseFloat(this.state.alpha).toFixed(2)}</p>
-                    <p>Beta: {this.parseFloat(this.state.beta).toFixed(2)}</p>
-                    <p>Gamma: {this.parseFloat(this.state.gamma).toFixed(2)}</p>
+                    <p>Alpha: {parseFloat(this.state.rotate.alpha).toFixed(2)}</p>
+                    <p>Beta: {parseFloat(this.state.rotate.beta).toFixed(2)}</p>
+                    <p>Gamma: {parseFloat(this.state.rotate.gamma).toFixed(2)}</p>
+                    <h3>{this.state.event}</h3>
                 </div>
                 <DrawingCanvas
                     left={left}
