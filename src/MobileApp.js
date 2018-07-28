@@ -43,7 +43,7 @@ class MobileApp extends Component {
             console.log("no connection");
         } else {
             this.props.conn.send({
-                type: "🖌️",
+                type: "draw",
                 penDown: this.state.pendown,
                 x: left,
                 y: top

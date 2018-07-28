@@ -53,7 +53,7 @@ class App extends Component {
             console.log('conn', conn);
             this.state.conn.on('data', function(data){
                 console.log('data', data);
-                if (data.type === "🖌️") {
+                if (data.type === "draw") {
                     console.log(`Move to ${data.x} ${data.y}`);
                 }
             });
