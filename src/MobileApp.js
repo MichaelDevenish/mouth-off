@@ -98,7 +98,7 @@ class MobileApp extends Component {
                     <p>Alpha: {parseFloat(this.state.rotate.alpha).toFixed(2)}</p>
                     <p>Beta: {parseFloat(this.state.rotate.beta).toFixed(2)}</p>
                     <p>Gamma: {parseFloat(this.state.rotate.gamma).toFixed(2)}</p>
-                    <h3>{this.state.event}</h3>
+
                 </div>
                 <DrawingCanvas
                     left={left}
