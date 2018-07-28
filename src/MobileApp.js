@@ -12,6 +12,7 @@ class MobileApp extends Component {
     state = {
         x: 0,
         y: 0,
+        connectedTo: null,
         id: this.props.id.id,
         peer: this.props.peer
     }
