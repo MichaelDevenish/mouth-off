@@ -13,7 +13,7 @@ class MobileApp extends Component {
     state = {
         x: 0,
         y: 0,
-        pendown: false,
+        penDown: false,
         connectedTo: null,
         id: this.props.id.id,
         peer: this.props.peer
@@ -44,7 +44,7 @@ class MobileApp extends Component {
         } else {
             this.props.conn.send({
                 type: "draw",
-                penDown: this.state.pendown,
+                penDown: true,
                 x: left,
                 y: top
             });
@@ -60,8 +60,8 @@ class MobileApp extends Component {
         });
     }
 
-    handlePenChange(pendown) {
-        this.setState({pendown});
+    handlePenChange(penDown) {
+        this.setState({penDown});
     }
 
     componentDidMount() {

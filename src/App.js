@@ -63,7 +63,7 @@ class App extends Component {
                     this.setState({
                         x: data.x,
                         y: data.y,
-                        pendown: data.penDown
+                        penDown: data.penDown
                     });
                 }
             });
