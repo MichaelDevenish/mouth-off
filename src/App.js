@@ -56,7 +56,7 @@ class App extends Component {
         peer.on('connection', (conn) => {
             this.handleSetConn(conn);
             console.log('conn', conn);
-            this.state.conn.on('data', function(data){
+            this.state.conn.on('data', (data) => {
                 console.log('data', data);
                 if (data.type === "draw") {
                     console.log(`Move to ${data.x} ${data.y}`);
