@@ -39,7 +39,7 @@ class MobileApp extends Component {
             x: left,
             y: top
         })
-        if (this.props.conn === null) {
+        if (!this.props.conn) {
             console.log("no connection");
         } else {
             this.props.conn.send({
@@ -79,7 +79,7 @@ class MobileApp extends Component {
         return (
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
-                <button onMouseDown={() => handlePenChange(true)} onMouseUp={() => handlePenChange(false)} type="button">Draw!</button> 
+                <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
                 <DrawingCanvas
                     left={left}
                     top={top}
