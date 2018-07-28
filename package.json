@@ -4,8 +4,11 @@
   "private": true,
   "dependencies": {
     "react": "^16.4.1",
+    "react-device-detect": "^1.5.8",
     "react-dom": "^16.4.1",
-    "react-scripts": "1.1.4"
+    "react-scripts": "1.1.4",
+    "simple-peer": "^9.1.2",
+    "simple-websocket": "^7.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
