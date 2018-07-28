@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { isMobile, isBrowser } from 'react-device-detect';
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  componentWillMount() {
+    let mode;
+    if (isBrowser) {
+      mode = 'browser';
+    } else {
+      mode = 'mobile';
+    }
+    this.setState({mode});
+  }
+
   render() {
     return (
       <div className="App">
@@ -11,7 +23,7 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
+          {this.state.mode}
         </p>
       </div>
     );
