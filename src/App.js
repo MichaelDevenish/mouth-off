@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserView, MobileView } from 'react-device-detect';
 import './App.css';
-import AccelerometerCanvas from './AccelerometerCanvas';
-
+import MobileApp from './MobileApp';
 
 class App extends Component {
     render() {
@@ -13,7 +12,7 @@ class App extends Component {
                 </BrowserView>
 
                 <MobileView>
-                    <AccelerometerCanvas />
+                    <MobileApp />
                 </MobileView>
             </div>
         );
