@@ -18,7 +18,7 @@ export default class {
         const { input } = this.state;
         return (
             <div>
-                <input/>
+                <input value={input} onChange={this.handleChange} />
                 <button onClick={() => connectHandler(input)} type="button">Connect</button> 
             </div>
         )
