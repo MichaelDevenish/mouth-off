@@ -4,6 +4,7 @@ import logo from './logo.svg';
 import './App.css';
 import Peer from 'peerjs';
 import MobileApp from './MobileApp';
+import DrawingCanvas from "./DrawingCanvas";
 
 /**
  * Genrate the 'unique' pin for connecting between peers
@@ -33,6 +34,10 @@ class App extends Component {
         // Record the client type for easy reference
         type: isBrowser ? 'browser' : 'mobile',
 
+        x: 0,
+        y: 0,
+        pendown: false,
+
         messages: [
           'test',
           'test2'
@@ -55,6 +60,11 @@ class App extends Component {
                 console.log('data', data);
                 if (data.type === "draw") {
                     console.log(`Move to ${data.x} ${data.y}`);
+                    this.setState({
+                        x: data.x,
+                        y: data.y,
+                        pendown: data.penDown
+                    });
                 }
             });
         });
@@ -74,7 +84,7 @@ class App extends Component {
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
-                  <MobileApp id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
+                  <DrawingCanvas top={this.state.x} left={this.state.y} penDown={this.state.penDown}/>
                 </BrowserView>
 
                 <MobileView>
