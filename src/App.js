@@ -15,8 +15,8 @@ function generatePin () {
     return ("0" + (Math.floor(Math.random() * (max - min + 1)) + min)).substr(-4);
 }
 
-const host = 'c0585c6e.ngrok.io';
-const port = 80;
+const host = 'peer-tartupuogj.now.sh';
+const port = 443;
 
 class App extends Component {
 

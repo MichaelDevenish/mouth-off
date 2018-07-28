@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "now": "^11.3.2",
     "peerjs": "^0.3.16",
     "react": "^16.4.1",
     "react-device-detect": "^1.5.8",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
     "simple-peer": "^9.1.2",
-    "simple-websocket": "^7.2.0"
+    "simple-websocket": "^7.2.0",
+    "surge": "^0.20.1"
   },
   "scripts": {
     "start": "react-scripts start",
