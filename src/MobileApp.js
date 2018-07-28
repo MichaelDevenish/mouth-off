@@ -79,7 +79,7 @@ class MobileApp extends Component {
         return (
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
-                <button class="pen-button" onMouseDown={() => handlePenChange(true)} onMouseUp={() => handlePenChange(false)} type="button">Draw!</button> 
+                <button class="pen-button" onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw!</button> 
                 <DrawingCanvas
                     left={left}
                     top={top}
