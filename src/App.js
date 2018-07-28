@@ -84,7 +84,7 @@ class App extends Component {
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
-                  <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
+                  <DrawingCanvas top={-this.state.y} left={-this.state.x} penDown={this.state.penDown}/>
                 </BrowserView>
 
                 <MobileView>
