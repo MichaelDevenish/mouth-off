@@ -44,7 +44,7 @@ class MobileApp extends Component {
         this.props.handleSetConn(conn);
         conn.on('open', function(){
             console.log('connection open', conn);
-            conn.send('');
+            conn.send('Connection Established');
         });
     }
 
