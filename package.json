@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "peerjs": "^0.3.16",
     "react": "^16.4.1",
     "react-device-detect": "^1.5.8",
     "react-dom": "^16.4.1",
