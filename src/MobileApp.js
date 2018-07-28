@@ -26,7 +26,7 @@ class MobileApp extends Component {
         } = this.state
 
         let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)) * -1);
-        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)));
+        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.z).toFixed(1)));
 
         const maxWidth = window.innerWidth - 4;
         const maxHeight = window.innerHeight - 4;
