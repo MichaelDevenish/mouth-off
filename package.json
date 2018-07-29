@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "now": "^11.3.2",
-    "dotenv": "^6.0.0",
     "peerjs": "^0.3.16",
     "react": "^16.4.1",
     "react-device-detect": "^1.5.8",
