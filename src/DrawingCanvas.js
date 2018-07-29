@@ -23,7 +23,7 @@ class DrawingCanvas extends Component {
         let {
             top,
             left
-        } = this.itemPoints(0)
+        } = this.itemPoints(50,100)
 
         const {
             prevPos: {
@@ -52,14 +52,14 @@ class DrawingCanvas extends Component {
         })
     }
 
-    itemPoints = (width) => {
+    itemPoints = (width, height) => {
         let {
             top,
             left
         } = this.props
 
         const maxWidth = window.innerWidth - width
-        const maxHeight = window.innerHeight - width
+        const maxHeight = window.innerHeight - height
         if (top > maxHeight) top = maxHeight
         if (left > maxWidth) left = maxWidth
         if (top < 0) top = 0
@@ -75,17 +75,18 @@ class DrawingCanvas extends Component {
         let {
             top,
             left
-        } = this.itemPoints(25)
+        } = this.itemPoints(55,105)
+
 
         return (
             <Fragment>
                 <canvas
                     className='canvas'
                     ref="canvas"
-                    width={window.innerWidth}
-                    height={window.innerHeight}
+                    width={window.innerWidth-50}
+                    height={window.innerHeight-100}
                 />
-                <div class="ball" style={{ left, top }} />
+                <div class="ball" style={{ left: left - 5 , top: top -5 }} />
             </Fragment>
         )
     }
