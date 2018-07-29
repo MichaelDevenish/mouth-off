@@ -33,7 +33,8 @@ input {
     border: none;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px;
+        font-size: 24px;
+    font-weight: 600;
 }
 
 button {
@@ -49,6 +50,7 @@ button {
 #loginMobile {
     width: 100%;
     font-size: 18pt;
+    padding-top: 10vh;
 }
 
 #loginCode {
@@ -67,7 +69,7 @@ button {
 }
 
 #login {
-  margin-top: 20vh;
+  padding-top: 20vh;
 }
 
 .App-title {
