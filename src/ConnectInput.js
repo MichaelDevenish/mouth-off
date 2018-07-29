@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 
 export default class ConnectInput extends React.Component {
     constructor(props) {
@@ -18,10 +18,10 @@ export default class ConnectInput extends React.Component {
     render() {
         const {connectHandler} = this.props;
         return (
-            <div>
+            <Fragment>
                 <input value={this.state.input} onChange={this.handleChange} />
                 <button onClick={() => connectHandler(this.state.input)} type="button">Connect</button> 
-            </div>
+            </Fragment>
         )
         
     }

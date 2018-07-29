@@ -34,8 +34,8 @@ class MobileApp extends Component {
             event
         });
 
-        let top = (y + (2 * parseFloat(event.accelerationIncludingGravity.y).toFixed(1)) * -1);
-        let left = (x + (2 * parseFloat(event.accelerationIncludingGravity.x).toFixed(1)));
+        let top = (y + (0.2 * parseFloat(event.rotationRate.alpha).toFixed(1)) * -1);
+        let left = (x + (0.2 * parseFloat(event.rotationRate.gamma).toFixed(1)) * -1);
 
         const maxWidth = window.innerWidth - 4;
         const maxHeight = window.innerHeight - 4;
@@ -98,7 +98,6 @@ class MobileApp extends Component {
                     <p>Alpha: {parseFloat(this.state.rotate.alpha).toFixed(2)}</p>
                     <p>Beta: {parseFloat(this.state.rotate.beta).toFixed(2)}</p>
                     <p>Gamma: {parseFloat(this.state.rotate.gamma).toFixed(2)}</p>
-
                 </div>
                 <DrawingCanvas
                     left={left}

@@ -4,13 +4,14 @@ body {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: #ffffff;
+    height: 100vh;
     background: linear-gradient(#fcee21, #f7931e);
 }
 
 .nav {
     font-size: 18pt;
     background-color: #f49e06;
-    min-height: 50px;
+    height: 50px;
 }
 
 .nav ul {
@@ -36,8 +37,8 @@ body {
 .canvas {
     border-radius: 15px;
     background-color: #ffffff;
-    width: 95%;
-    height: calc(90vh - 50px);
-    margin: 5vh auto 0 auto;
+    width: calc(100vw - 50px);
+    height: calc(100vh - 100px);
+    margin: 25px 25px 0 25px;
     filter: drop-shadow(2px 2px 2px rgba(114, 75, 3, 0.5)); /* (offset-x offset-y blur-radius spread-radius color) */
 }
