@@ -80,11 +80,26 @@ class App extends Component {
         return (
             <div className="App">
                 <BrowserView>
+                    
                   <h1> {this.state.id} </h1>
                   <div>
                     {this.state.messages.join(', ')}
                   </div>
-                  <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
+                    <div class="nav">
+                        <ul>
+                            <li>
+                                <object type="image/svg+xml" data="/img/trebuchet.svg" width="30" height="34">
+                                    <img src="/img/trebuchet-sml.png" width="30" height="34" alt="Trebuchet"/>
+                                </object>
+                            </li>
+                                <li>Trebuchet</li>
+                            </ul>
+                        </div>
+                        <DrawingCanvas
+                            top={this.state.y}
+                            left={this.state.x}
+                            penDown={this.state.penDown}
+                        />
                 </BrowserView>
 
                 <MobileView>
