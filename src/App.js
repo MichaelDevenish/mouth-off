@@ -81,7 +81,7 @@ class App extends Component {
     }
 
     ConnectionSwitch = (props) => {
-        if (true || props.isConnected) {
+        if (props.isConnected) {
             // Show the Canvas
             return ( <Fragment>
                     <div class="nav">
