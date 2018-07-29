@@ -84,7 +84,7 @@ class App extends Component {
         if (props.isConnected) {
             // Show the Canvas
             return ( <Fragment>
-                    <div class="nav">
+                    <div className="nav">
                         <ul>
                             <li>
                                 <object type="image/svg+xml" data="/img/trebuchet.svg" width="30" height="34">
@@ -103,7 +103,18 @@ class App extends Component {
             )
         } else {
             // Show the ConnectionScreen
-            return <h1> {this.state.id} </h1>
+            return (
+                <div id="login">
+                    <object type="image/svg+xml" data="img/trebuchet.svg" width="200" height="224">
+                        <img src="img/trebuchet.png" width="200" height="224" alt="Trebuchet" />
+                    </object>
+                    <h1>Connection code</h1>
+                    <div id="loginCode"><p>{this.state.id}</p></div>
+                    <p>Go to this website on your phone and use the code above to make a drawing on the screen with your phone.</p>
+               </div>
+            )
+            
+        
         }
     };
 

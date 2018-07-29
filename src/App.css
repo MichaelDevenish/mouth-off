@@ -24,6 +24,25 @@
   border-radius: 100%;
 }
 
+#loginCode {
+    border-radius: 5px;
+    background-color: rgba(255,255,255, 0.5);
+    width: 300px;
+    height: 50px;
+    font-size: 24px;
+    font-weight: 600;
+    display: inline-block;
+    color: #333333;
+}
+
+#loginCode p {
+  margin: 12px;
+}
+
+#login {
+  margin-top: 20vh;
+}
+
 .App-title {
   font-size: 1.5em;
 }
