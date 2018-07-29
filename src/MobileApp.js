@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from 'react';
-import DrawingCanvas from './DrawingCanvas';
-import ConnectInput from "./ConnectInput.js";
 
 class MobileApp extends Component {
 
     constructor(props) {
         super(props);
-        this.connectHandler = this.connectHandler.bind(this);
         this.handlePenChange = this.handlePenChange.bind(this);
     }
 
@@ -60,14 +57,6 @@ class MobileApp extends Component {
         this.setState({ recenter: false });
     }
 
-    connectHandler(stringId) {
-        var conn = this.state.peer.connect(stringId);
-        this.props.handleSetConn(conn);
-        conn.on('open', function(){
-            console.log('connection open', conn);
-            conn.send('Connection Established');
-        });
-    }
 
     handlePenChange() {
         this.setState({penDown : !this.state.penDown});

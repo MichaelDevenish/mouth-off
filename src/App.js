@@ -1,10 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { isBrowser, BrowserView, MobileView } from 'react-device-detect';
-import logo from './logo.svg';
 import './App.css';
 import Peer from 'peerjs';
 import MobileApp from './MobileApp';
 import DrawingCanvas from "./DrawingCanvas";
+import ConnectInput from "./ConnectInput.js";
 
 /**
  * Genrate the 'unique' pin for connecting between peers
@@ -104,7 +104,7 @@ class App extends Component {
         });
     }
 
-    ConnectionSwitch = (props) => {
+    DesktopConnectionSwitch = (props) => {
         if (props.isConnected) {
             // Show the Canvas
             return ( <Fragment>
@@ -136,21 +136,44 @@ class App extends Component {
                     <div id="loginCode"><p>{this.state.id}</p></div>
                     <p>Go to this website on your phone and use the code above to make a drawing on the screen with your phone.</p>
                </div>
-            )
-            
-        
+            )        
         }
     };
+
+    MobileConnectionSwitch = (props) => {
+        if (props.isConnected) {
+            // Show the Canvas
+            return (
+            
+                <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} />
+            )
+        } else {
+            // Show the ConnectionScreen
+            return (
+                <ConnectInput connectHandler={this.connectHandler} />
+
+            )
+        }
+    };
+
+    connectHandler = (stringId) => {
+        var conn = this.state.peer.connect(stringId);
+        this.handleSetConn(conn);
+        conn.on('open', function () {
+            console.log('connection open', conn);
+            conn.send('Connection Established');
+        });
+    }
 
     render() {
         return (
             <div className="App">
                 <BrowserView>
-                    <this.ConnectionSwitch isConnected={this.state.isConnected} />
+                    <this.DesktopConnectionSwitch isConnected={this.state.isConnected} />
                 </BrowserView>
 
                 <MobileView>
-                  <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
+                    <this.MobileConnectionSwitch isConnected={this.state.isConnected} />
                 </MobileView>
             </div>
         );
