@@ -75,7 +75,7 @@ class MobileApp extends Component {
         } = this.state
 
         return (
-                <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
+            <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
         );
     }
 }
