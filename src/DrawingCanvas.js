@@ -80,6 +80,7 @@ class DrawingCanvas extends Component {
         return (
             <Fragment>
                 <canvas
+                    className='canvas'
                     ref="canvas"
                     width={window.innerWidth}
                     height={window.innerHeight}

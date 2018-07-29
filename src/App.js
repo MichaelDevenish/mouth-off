@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { isBrowser, BrowserView, MobileView } from 'react-device-detect';
 import logo from './logo.svg';
 import './App.css';
@@ -107,7 +107,24 @@ class App extends Component {
     ConnectionSwitch = (props) => {
         if (props.isConnected) {
             // Show the Canvas
-            return <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
+            return ( <Fragment>
+                    <div class="nav">
+                        <ul>
+                            <li>
+                                <object type="image/svg+xml" data="/img/trebuchet.svg" width="30" height="34">
+                                    <img src="/img/trebuchet-sml.png" width="30" height="34" alt="Trebuchet" />
+                                </object>
+                            </li>
+                            <li>Trebuchet</li>
+                        </ul>
+                    </div>
+                    <DrawingCanvas
+                        top={this.state.y}
+                        left={this.state.x}
+                        penDown={this.state.penDown}
+                    />
+                </Fragment>
+            )
         } else {
             // Show the ConnectionScreen
             return <h1> {this.state.id} </h1>

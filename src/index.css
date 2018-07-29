@@ -1,5 +1,44 @@
 body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    color: #ffffff;
+    height: 100vh;
+    background: linear-gradient(#fcee21, #f7931e);
+}
+
+.nav {
+    font-size: 18pt;
+    background-color: #f49e06;
+    height: 50px;
+}
+
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav ul li {
+    display: inline;
+    padding: 5px;
+}
+
+.nav object {
+    padding-top: 5px;
+    margin-bottom: -7px;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.canvas {
+    border-radius: 15px;
+    background-color: #ffffff;
+    width: calc(100vw - 50px);
+    height: calc(100vh - 100px);
+    margin: 25px 25px 0 25px;
+    filter: drop-shadow(2px 2px 2px rgba(114, 75, 3, 0.5)); /* (offset-x offset-y blur-radius spread-radius color) */
 }
