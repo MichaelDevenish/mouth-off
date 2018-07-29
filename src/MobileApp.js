@@ -14,6 +14,7 @@ class MobileApp extends Component {
         x: 0,
         y: 0,
         penDown: false,
+        recenter: false,
         connectedTo: null,
         id: this.props.id.id,
         peer: this.props.peer,
@@ -34,15 +35,10 @@ class MobileApp extends Component {
             event
         });
 
+        // Move this to the desktop
         let top = (y + (0.2 * parseFloat(event.rotationRate.alpha).toFixed(1)) * -1);
         let left = (x + (0.2 * parseFloat(event.rotationRate.gamma).toFixed(1)) * -1);
 
-        const maxWidth = window.innerWidth - 4;
-        const maxHeight = window.innerHeight - 4;
-        if (top > maxHeight) top = maxHeight
-        if (left > maxWidth) left = maxWidth
-        if (top < 0) top = 0
-        if (left < 0) left = 0
 
         this.setState({
             x: left,
@@ -53,11 +49,15 @@ class MobileApp extends Component {
         } else {
             this.props.conn.send({
                 type: "draw",
-                penDown: true,
-                x: left,
-                y: top
+                penDown: this.state.penDown,
+                recenter: this.state.recenter,
+                // x: left,
+                // y: top,
+                alpha: event.rotationRate.alpha,
+                gamma: event.rotationRate.gamma
             });
         }
+        this.setState({ recenter: false });
     }
 
     connectHandler(stringId) {
@@ -69,8 +69,12 @@ class MobileApp extends Component {
         });
     }
 
-    handlePenChange(penDown) {
-        this.setState({penDown});
+    handlePenChange() {
+        this.setState({penDown : !this.state.penDown});
+    }
+
+    handleRecenter() {
+        this.setState({ recenter: true });
     }
 
     componentDidMount() {
@@ -88,7 +92,8 @@ class MobileApp extends Component {
         return (
             <Fragment>
                 <ConnectInput connectHandler={this.connectHandler} />
-                <button onMouseDown={() => this.handlePenChange(true)} onMouseUp={() => this.handlePenChange(false)} type="button">Draw.</button> 
+                <button onMouseDown={() => this.handlePenChange()} type="button">Draw.</button> 
+                <button onMouseDown={() => this.handleRecenter()} type="button">Recenter</button> 
                 <div>
                     <h2>Acceleration</h2>
                     <p>X: {parseFloat(this.state.accel.x).toFixed(2)}</p>
