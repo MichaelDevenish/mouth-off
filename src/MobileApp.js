@@ -80,24 +80,8 @@ class MobileApp extends Component {
 
         return (
             <Fragment>
-                <ConnectInput connectHandler={this.connectHandler} />
                 <button onMouseDown={() => this.handlePenChange()} type="button">Draw.</button> 
                 <button onMouseDown={() => this.handleRecenter()} type="button">Recenter</button> 
-                <div>
-                    <h2>Acceleration</h2>
-                    <p>X: {parseFloat(this.state.accel.x).toFixed(2)}</p>
-                    <p>Y: {parseFloat(this.state.accel.y).toFixed(2)}</p>
-                    <p>Z: {parseFloat(this.state.accel.z).toFixed(2)}</p>
-                    <h2>Rotation</h2>
-                    <p>Alpha: {parseFloat(this.state.rotate.alpha).toFixed(2)}</p>
-                    <p>Beta: {parseFloat(this.state.rotate.beta).toFixed(2)}</p>
-                    <p>Gamma: {parseFloat(this.state.rotate.gamma).toFixed(2)}</p>
-                </div>
-                <DrawingCanvas
-                    left={left}
-                    top={top}
-                    penDown
-                />
             </Fragment>
         );
     }

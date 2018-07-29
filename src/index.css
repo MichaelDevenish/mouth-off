@@ -4,7 +4,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     color: #ffffff;
-    height: 100vh;
+    min-height: 100vh;
+    height: 100%;
     background: linear-gradient(#fcee21, #f7931e);
 }
 

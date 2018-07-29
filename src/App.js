@@ -144,14 +144,12 @@ class App extends Component {
         if (props.isConnected) {
             // Show the Canvas
             return (
-            
                 <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} />
             )
         } else {
             // Show the ConnectionScreen
             return (
                 <ConnectInput connectHandler={this.connectHandler} />
-
             )
         }
     };
