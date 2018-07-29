@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import ConnectInput from './ConnectInput';
+import DrawingCanvas from './DrawingCanvas';
 
 class MobileApp extends Component {
 
@@ -48,8 +50,6 @@ class MobileApp extends Component {
                 type: "draw",
                 penDown: this.state.penDown,
                 recenter: this.state.recenter,
-                // x: left,
-                // y: top,
                 alpha: event.rotationRate.alpha,
                 gamma: event.rotationRate.gamma
             });
