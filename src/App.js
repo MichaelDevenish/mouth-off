@@ -4,7 +4,6 @@ import './App.css';
 import Peer from 'peerjs';
 import MobileApp from './MobileApp';
 import DrawingCanvas from "./DrawingCanvas";
-import { networkOnly } from 'sw-toolbox';
 import ConnectInput from "./ConnectInput.js";
 
 /**
@@ -37,16 +36,21 @@ class App extends Component {
 
         x: 0,
         y: 0,
-        pendown: false,
 
-        messages: [
-          'test',
-          'test2'
-        ],
         conn: null,
 
         isConnected: false,
+
+        dataCount: 0,
+
+        runTime: 0,
       };
+    }
+
+    dataFrequency = () => {
+        const points = this.state.dataCount || 0;
+        const time = this.state.runTime || 0;
+        return points / time;
     }
 
     componentDidMount() {
@@ -59,13 +63,33 @@ class App extends Component {
         peer.on('connection', (conn) => {
             this.handleSetConn(conn);
             console.log('conn', conn);
-            this.state.conn.on('data', (data) => {
-                console.log('data', data);
-                if (data.type === "draw") {
-                    console.log(`Move to ${data.x} ${data.y}`);
+            setInterval(() => {
                     this.setState({
-                        x: data.x,
-                        y: data.y,
+                        runTime: this.state.runTime + 1
+                    });
+                    console.log('Frequency: ', this.dataFrequency());   
+                }, 1000);
+
+            this.state.conn.on('data', (data) => {
+                this.setState({
+                    dataCount: this.state.dataCount + 1
+                });
+                
+                // console.log('data', data);
+                if (data.type === "draw") {
+                    let x, y;
+                    // Detect if we got a recenter request
+                    if (data.recenter) {
+                        y = window.innerHeight / 2;
+                        x = window.innerWidth / 2;
+                    } else {
+                        y = (this.state.y + (0.2 * parseFloat(data.alpha).toFixed(1)) * -1);
+                        x = (this.state.x + (0.2 * parseFloat(data.gamma).toFixed(1)) * -1);
+
+                    }
+                    this.setState({
+                        x: x,
+                        y: y,
                         penDown: data.penDown
                     });
                 }
@@ -120,14 +144,12 @@ class App extends Component {
         if (props.isConnected) {
             // Show the Canvas
             return (
-            
                 <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} />
             )
         } else {
             // Show the ConnectionScreen
             return (
                 <ConnectInput connectHandler={this.connectHandler} />
-
             )
         }
     };

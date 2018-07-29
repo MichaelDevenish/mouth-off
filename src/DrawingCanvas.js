@@ -23,7 +23,7 @@ class DrawingCanvas extends Component {
         let {
             top,
             left
-        } = this.itemPoints(4)
+        } = this.itemPoints(0)
 
         const {
             prevPos: {
@@ -75,7 +75,7 @@ class DrawingCanvas extends Component {
         let {
             top,
             left
-        } = this.itemPoints(5)
+        } = this.itemPoints(25)
 
         return (
             <Fragment>
@@ -85,7 +85,7 @@ class DrawingCanvas extends Component {
                     width={window.innerWidth}
                     height={window.innerHeight}
                 />
-                <div class="ball" style={{ left: left - 5, top: top + 95 }} />
+                <div class="ball" style={{ left, top }} />
             </Fragment>
         )
     }
