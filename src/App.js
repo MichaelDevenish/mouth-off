@@ -43,7 +43,9 @@ class App extends Component {
           'test',
           'test2'
         ],
-        conn: null
+        conn: null,
+
+        isConnected: false,
       };
     }
 
@@ -73,23 +75,29 @@ class App extends Component {
 
     handleSetConn(conn) {
         this.setState({
-            conn
+            conn,
+            isConnected: true
         });
     }
+
+    ConnectionSwitch = (props) => {
+        if (props.isConnected) {
+            // Show the Canvas
+            return <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
+        } else {
+            // Show the ConnectionScreen
+            return <h1> {this.state.id} </h1>
+        }
+    };
 
     render() {
         return (
             <div className="App">
                 <BrowserView>
-                  <h1> {this.state.id} </h1>
-                  <div>
-                    {this.state.messages.join(', ')}
-                  </div>
-                  <DrawingCanvas top={this.state.y} left={this.state.x} penDown={this.state.penDown}/>
+                    <this.ConnectionSwitch isConnected={this.state.isConnected} />
                 </BrowserView>
 
                 <MobileView>
-                  <h1> {this.state.id} </h1>
                   <MobileApp conn={this.state.conn} id={this.state.id} peer={this.state.peer} handleSetConn={this.handleSetConn}/>
                 </MobileView>
             </div>
